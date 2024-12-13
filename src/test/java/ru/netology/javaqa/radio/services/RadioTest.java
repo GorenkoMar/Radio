@@ -11,7 +11,6 @@ public class RadioTest {
         Radio rad = new Radio();
         rad.setCurrentVolume(50);
         rad.increaseVolume();
-
         int expected = 51;
         int actual = rad.getCurrentVolume();
 
@@ -81,22 +80,22 @@ public class RadioTest {
 
     @Test
     public void switchStationForward() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(5);
+        Radio rad = new Radio(3);
+        rad.setCurrentStation(1);
         rad.nextCurrentStation();
-        int expected = 6;
-        int actual = rad.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(1, rad.getIdStation());
+        Assertions.assertEquals(3, rad.getQuantityStations());
     }
 
     @Test
     public void switchStationForwardFromMax() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(9);
+        Radio rad = new Radio(33);
+        rad.setCurrentStation(32);
         rad.nextCurrentStation();
-        int expected = 0;
-        int actual = rad.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(0, rad.getIdStation());
+        Assertions.assertEquals(33, rad.getQuantityStations());
     }
 
     @Test
@@ -104,47 +103,46 @@ public class RadioTest {
         Radio rad = new Radio();
         rad.setCurrentStation(0);
         rad.nextCurrentStation();
-        int expected = 1;
-        int actual = rad.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(1, rad.getCurrentStation());
+        Assertions.assertEquals(10, rad.getQuantityStations());
     }
 
     @Test
     public void switchStationBackwardFromMin() {
-        Radio rad = new Radio();
+        Radio rad = new Radio(100);
         rad.setCurrentStation(0);
         rad.prevCurrentStation();
-        int expected = 9;
-        int actual = rad.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(99, rad.getIdStation());
+        Assertions.assertEquals(100, rad.getQuantityStations());
 
     }
 
     @Test
     public void switchStationBackwardFromMax() {
         Radio rad = new Radio();
-        rad.setCurrentStation(9);
+        rad.setCurrentStation(10);
         rad.prevCurrentStation();
-        int expected = 8;
-        int actual = rad.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(8, rad.getIdStation());
     }
 
     @Test
     public void setStation() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(3);
-        int expected = 3;
+        Radio rad = new Radio(13);
+        rad.setCurrentStation(10);
+        int expected = 10;
         int actual = rad.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void setStationAboveMax() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(10);
+        Radio rad = new Radio(12);
+        rad.setCurrentStation(13);
         int expected = 0;
-        int actual = rad.getCurrentStation();
+        int actual = rad.getIdStation();
         Assertions.assertEquals(expected, actual);
     }
 
@@ -157,4 +155,3 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 }
-
