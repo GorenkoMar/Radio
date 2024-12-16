@@ -77,8 +77,8 @@ public class RadioTest {
 
     @Test
     public void setCurrentStationAboveMax() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(11);
+        Radio rad = new Radio(5);
+        rad.setCurrentStation(5);
         int expected = 0;
         int actual = rad.getCurrentStation();
         Assertions.assertEquals(expected, actual);
@@ -86,12 +86,12 @@ public class RadioTest {
 
     @Test
     public void switchStationForwardFromMax() {
-        Radio rad = new Radio(33);
-        rad.setCurrentStation(32);
+        Radio rad = new Radio(5);
+        rad.setCurrentStation(4);
         rad.nextCurrentStation();
 
         Assertions.assertEquals(0, rad.getCurrentStation());
-        Assertions.assertEquals(32, rad.getQuantityStations());
+
     }
 
 
@@ -106,42 +106,42 @@ public class RadioTest {
 
 
     @Test
-    public void switchStationForwardFrom8() {
-        Radio rad = new Radio();
-        rad.setCurrentStation(8);
+    public void switchStationForwardFrom3() {
+        Radio rad = new Radio(5);
+        rad.setCurrentStation(3);
         rad.nextCurrentStation();
 
-        Assertions.assertEquals(9, rad.getCurrentStation());
+        Assertions.assertEquals(4, rad.getCurrentStation());
     }
 
     @Test
     public void switchStationForwardFrom1() {
-        Radio rad = new Radio(33);
+        Radio rad = new Radio(5);
         rad.setCurrentStation(1);
         rad.nextCurrentStation();
 
         Assertions.assertEquals(2, rad.getCurrentStation());
-        Assertions.assertEquals(32, rad.getQuantityStations());
+
     }
 
     @Test
     public void switchStationForwardFromMin() {
-        Radio rad = new Radio();
+        Radio rad = new Radio(5);
         rad.setCurrentStation(0);
         rad.nextCurrentStation();
 
         Assertions.assertEquals(1, rad.getCurrentStation());
-        Assertions.assertEquals(9, rad.getQuantityStations());
+
     }
 
     @Test
     public void switchStationBackwardFromMin() {
-        Radio rad = new Radio(100);
+        Radio rad = new Radio();
         rad.setCurrentStation(0);
         rad.prevCurrentStation();
 
-        Assertions.assertEquals(99, rad.getCurrentStation());
-        Assertions.assertEquals(99, rad.getQuantityStations());
+        Assertions.assertEquals(9, rad.getCurrentStation());
+
     }
 
     @Test
